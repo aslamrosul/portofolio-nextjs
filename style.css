@@ -189,7 +189,8 @@ main {
     width: 60px; /* diperbesar untuk muat tombol lebih besar */
     z-index: 50;
     color: var(--text-light);
-    left: 40px;
+    /* DIPINDAHKAN: dari kiri ke kanan */
+    right: 40px;
 }
 .social-sidebar ul {
     list-style: none;
@@ -235,7 +236,8 @@ main {
 /* Responsive: kecilkan sedikit pada layar sempit */
 @media (max-width: 768px) {
     .social-sidebar {
-        left: 16px;
+        /* DIPINDAHKAN: dari kiri ke kanan pada layar kecil */
+        right: 16px;
         width: 44px;
     }
     .social-sidebar a {
@@ -386,11 +388,12 @@ main {
     font-weight: 500;
 }
 .about-photo-container {
-    max-width: 420px;           /* DIPERBARUI: foto diperbesar */
+    /* DIPERBARUI: kecilkan sedikit foto profil */
+    max-width: 360px; /* dari 420px -> 360px */
     position: relative;
     border-radius: 8px;
-    background-color: transparent; /* Hapus warna hijau, biarkan netral */
-    margin-top: 0;             /* DIUBAH: hapus offset vertikal agar sejajar */
+    background-color: transparent;
+    margin-top: 0;
     transition: transform 0.25s ease;
     border: 1px solid rgba(255,255,255,0.06); /* ringan frame grayscale */
 }
@@ -398,6 +401,8 @@ main {
     transform: translate(-6px, -6px);
 }
 .about-photo {
+    width: 100%;
+    height: auto;
     filter: grayscale(100%) contrast(1.05) brightness(0.95);
     transition: filter 0.25s ease, transform 0.25s ease;
 }
