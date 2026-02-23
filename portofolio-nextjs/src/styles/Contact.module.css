@@ -1,0 +1,19 @@
+.contactSection {
+    padding-bottom: var(--section-padding);
+}
+
+.contactContent {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contactText {
+    font-size: 1.15rem;
+    margin-bottom: 40px;
+}
+
+.contactBtn {
+    font-size: 1rem;
+    padding: 18px 30px;
+}

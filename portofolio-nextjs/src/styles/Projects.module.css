@@ -1,0 +1,238 @@
+.projectGrid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 80px;
+}
+
+.projectContent {
+    grid-column: 1 / 8;
+    grid-row: 1 / 1;
+    z-index: 2;
+    text-align: left;
+}
+
+.projectGrid.reversed .projectContent {
+    grid-column: 6 / 13;
+    text-align: right;
+}
+
+.projectLabel {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 0.9rem;
+}
+
+.projectTitle {
+    font-size: clamp(22px, 5vw, 30px);
+    margin: 5px 0 20px;
+}
+
+.projectTitle a {
+    color: var(--text-lightest);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.projectTitle a:hover {
+    color: var(--accent);
+}
+
+.projectDesc {
+    background-color: var(--bg-light);
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7);
+    font-size: 1rem;
+    color: var(--text-light);
+}
+
+.projectTech {
+    display: flex;
+    justify-content: flex-start;
+    list-style: none;
+    margin: 20px 0 0 0;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    flex-wrap: wrap;
+}
+
+.projectGrid.reversed .projectTech {
+    justify-content: flex-end;
+}
+
+.projectTech li {
+    margin-right: 15px;
+    margin-bottom: 5px;
+}
+
+.projectGrid.reversed .projectTech li {
+    margin-right: 0;
+    margin-left: 15px;
+}
+
+.projectLinks {
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.projectGrid.reversed .projectLinks {
+    justify-content: flex-end;
+}
+
+.projectLinks a {
+    color: var(--text-light);
+    margin-right: 15px;
+}
+
+.projectGrid.reversed .projectLinks a {
+    margin-right: 0;
+    margin-left: 15px;
+}
+
+.projectLinks a svg {
+    width: 22px;
+    height: 22px;
+    transition: all 0.3s ease;
+}
+
+.projectLinks a:hover svg {
+    color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.projectImage {
+    grid-column: 6 / 13;
+    grid-row: 1 / 1;
+    position: relative;
+}
+
+.projectGrid.reversed .projectImage {
+    grid-column: 1 / 8;
+}
+
+.projectImage img {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+    filter: brightness(0.7) grayscale(0.5);
+    transition: all 0.3s ease;
+}
+
+.projectImage a:hover img {
+    filter: none;
+}
+
+.otherProjectsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.projectCard {
+    background-color: var(--bg-light);
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.projectCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 30px -15px rgba(2,12,27,0.7);
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.folderIcon {
+    width: 40px;
+    height: 40px;
+    color: var(--accent);
+}
+
+.cardLinks a {
+    color: var(--text-light);
+    margin-left: 10px;
+}
+
+.cardLinks a svg {
+    width: 20px;
+    height: 20px;
+}
+
+.cardLinks a:hover svg {
+    color: var(--accent);
+}
+
+.cardTitle {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.cardTitle a {
+    color: var(--text-lightest);
+    text-decoration: none;
+}
+
+.cardTitle a:hover {
+    color: var(--accent);
+}
+
+.cardDesc {
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+}
+
+.projectTechSmall {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-dark);
+}
+
+.projectTechSmall li {
+    margin-right: 15px;
+    margin-top: auto;
+}
+
+@media (max-width: 768px) {
+    .projectGrid, .projectGrid.reversed {
+        grid-template-columns: 1fr;
+    }
+    .projectContent, .projectGrid.reversed .projectContent {
+        grid-column: 1 / 1;
+        text-align: left;
+    }
+    .projectImage, .projectGrid.reversed .projectImage {
+        grid-column: 1 / 1;
+        margin-top: 30px;
+        grid-row: 2;
+    }
+    .projectDesc {
+        background-color: transparent;
+        padding: 0;
+        box-shadow: none;
+    }
+    .projectTech, .projectGrid.reversed .projectTech {
+        justify-content: flex-start;
+    }
+    .projectTech li, .projectGrid.reversed .projectTech li {
+        margin-left: 0;
+        margin-right: 15px;
+    }
+    .projectLinks, .projectGrid.reversed .projectLinks {
+        justify-content: flex-start;
+    }
+}
