@@ -8,8 +8,7 @@ import Projects from '@/components/Projects'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 import SocialSidebar from '@/components/SocialSidebar'
-import fs from 'fs'
-import path from 'path'
+import { prisma } from '@/lib/prisma'
 
 interface HomeProps {
   portfolioData: any
@@ -59,8 +58,8 @@ export default function Home({ portfolioData }: HomeProps) {
   return (
     <>
       <Head>
-        <title>Aslam Rosul Ahmad - Web Developer & Security Enthusiast</title>
-        <meta name="description" content="Portfolio Aslam Rosul Ahmad - Web Developer, Security Enthusiast, Data Analyst" />
+        <title>{portfolioData.hero.name} - Web Developer & Security Enthusiast</title>
+        <meta name="description" content={`Portfolio ${portfolioData.hero.name} - ${portfolioData.hero.description}`} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
         <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
@@ -83,13 +82,119 @@ export default function Home({ portfolioData }: HomeProps) {
 }
 
 export async function getServerSideProps() {
-  const filePath = path.join(process.cwd(), 'src/data/portfolio.json')
-  const fileContents = fs.readFileSync(filePath, 'utf8')
-  const portfolioData = JSON.parse(fileContents)
+  try {
+    // Fetch data from PostgreSQL via Prisma
+    const [hero, about, experience, featuredProjects, otherProjects, contact, social, settings] = await Promise.all([
+      prisma.hero.findFirst({ include: { roles: { orderBy: { order: 'asc' } } } }),
+      prisma.about.findFirst(),
+      prisma.experience.findMany({ orderBy: { order: 'asc' } }),
+      prisma.featuredProject.findMany({ orderBy: { order: 'asc' } }),
+      prisma.otherProject.findMany({ orderBy: { order: 'asc' } }),
+      prisma.contact.findFirst(),
+      prisma.social.findFirst(),
+      prisma.settings.findFirst()
+    ])
 
-  return {
-    props: {
-      portfolioData
+    // Format data to match frontend structure
+    const portfolioData = {
+      hero: {
+        intro: hero?.intro || 'Halo, nama saya',
+        name: hero?.name || 'Your Name',
+        roles: hero?.roles.map((r: any) => r.text) || ['Web Developer.'],
+        description: hero?.description || 'Your description here.'
+      },
+      about: {
+        text: about?.text || 'About text here.',
+        image: about?.image || '/profil.jpg'
+      },
+      experience: experience.map((exp: any) => ({
+        id: exp.id,
+        period: exp.period,
+        institution: exp.institution,
+        position: exp.position,
+        description: exp.description
+      })),
+      projects: {
+        featured: featuredProjects.map((proj: any) => ({
+          id: proj.id,
+          label: proj.label,
+          title: proj.title,
+          description: proj.description,
+          technologies: proj.technologies,
+          github: proj.github,
+          demo: proj.demo,
+          image: proj.image
+        })),
+        other: otherProjects.map((proj: any) => ({
+          id: proj.id,
+          title: proj.title,
+          description: proj.description,
+          technologies: proj.technologies,
+          github: proj.github
+        }))
+      },
+      contact: {
+        text: contact?.text || 'Contact text here.',
+        email: contact?.email || 'your@email.com'
+      },
+      social: {
+        github: social?.github || 'https://github.com',
+        linkedin: social?.linkedin || 'https://linkedin.com',
+        email: social?.email || 'your@email.com'
+      },
+      settings: {
+        cvUrl: settings?.cvUrl || '/cv.pdf',
+        theme: {
+          accentColor: settings?.accentColor || '#64ffda'
+        }
+      }
+    }
+
+    return {
+      props: {
+        portfolioData
+      }
+    }
+  } catch (error) {
+    console.error('Error fetching data from database:', error)
+    
+    // Fallback to empty data if database fails
+    return {
+      props: {
+        portfolioData: {
+          hero: {
+            intro: 'Halo, nama saya',
+            name: 'Your Name',
+            roles: ['Web Developer.'],
+            description: 'Please run database setup.'
+          },
+          about: {
+            text: 'Please run database setup.',
+            image: '/profil.jpg'
+          },
+          experience: [],
+          projects: {
+            featured: [],
+            other: []
+          },
+          contact: {
+            text: 'Please run database setup.',
+            email: 'your@email.com'
+          },
+          social: {
+            github: 'https://github.com',
+            linkedin: 'https://linkedin.com',
+            email: 'your@email.com'
+          },
+          settings: {
+            cvUrl: '/cv.pdf',
+            theme: {
+              accentColor: '#64ffda'
+            }
+          }
+        }
+      }
     }
   }
 }
+
