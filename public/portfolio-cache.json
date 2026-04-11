@@ -1,0 +1,112 @@
+{
+  "hero": {
+    "intro": "Halo, nama saya",
+    "name": "Aslam Rosul Ahmad",
+    "roles": [
+      "Web Developer.",
+      "Security Enthusiast.",
+      "Data Analyst.",
+      "Mobile Developer."
+    ],
+    "description": "Saya seorang mahasiswa Teknik Informatika di Politeknik Negeri Malang dengan fokus pada Web Development, Mobile Developement, Analisis Data, dan Keamanan Siber. Saya membangun dan mengamankan aplikasi web."
+  },
+  "about": {
+    "text": "Saya Aslam Rosul Ahmad, seorang Mahasiswa Politeknik Negeri Malang jurusan Teknik Informatika. Saya memiliki ketertarikan dalam pengembangan web dan mobile, analisis data, serta keamanan siber (pentesting). Bagi saya, teknologi bukan hanya tentang membuat sesuatu berfungsi, tetapi juga memastikan sistem tersebut efisien, aman, dan bermanfaat bagi pengguna. Saya terus belajar dan mengerjakan proyek nyata untuk mengasah kemampuan dalam pemrograman, pengelolaan data, serta pemecahan masalah di dunia IT.",
+    "image": "/profil.jpg"
+  },
+  "experience": [
+    {
+      "id": 17,
+      "period": "2023 - Sekarang",
+      "institution": "Politeknik Negeri Malang",
+      "position": "D4 - Teknik Informatika",
+      "description": "Fokus pada Rekayasa Perangkat Lunak, Jaringan Komputer, dan Keamanan Sistem. Saat ini sedang menempuh semester [Isi Semester Anda]."
+    }
+  ],
+  "projects": {
+    "featured": [
+      {
+        "id": 30,
+        "label": "Proyek Laravel",
+        "title": "Sistem Pelaporan Kerusakan Fasilitas - FixIT",
+        "description": "Bekerja sama dengan beberapa mahasiswa saat semester 5, membangun sistem pelaporan dan perbaikan fasilitas kampus berbasis web untuk Jurusan Teknologi Informasi Polinema menggunakan Laravel 10 dan MySQL. Fitur utama mencakup multi-role login, pelaporan kerusakan dengan foto, prioritas perbaikan berbasis DSS, serta laporan dan statistik fasilitas.",
+        "technologies": [
+          "Laravel",
+          "PHP",
+          "MySQL",
+          "JavaScript",
+          "Bootstrap"
+        ],
+        "github": "https://github.com/aslamrosul/PBL_KEL1_FASILITAS",
+        "demo": "#",
+        "image": "/project1.jpg"
+      },
+      {
+        "id": 31,
+        "label": "Proyek Keamanan & Data",
+        "title": "Sistem Informasi Portal Berita - KataData",
+        "description": "Bekerja sama dengan beberapa mahasiswa saat semester 3, membangun web portal berita berbasis MongoDB dengan PHP, HTML, CSS, dan JavaScript. Fitur utama: CRUD berita, kategori, pencarian, notifikasi, berita trending, serta dashboard admin dan halaman utama pengguna.",
+        "technologies": [
+          "PHP",
+          "MongoDB",
+          "JavaScript",
+          "HTML",
+          "CSS"
+        ],
+        "github": "https://github.com/dedybayu/Project_MongoDB_Basdat/",
+        "demo": "#",
+        "image": "/project2.jpg"
+      }
+    ],
+    "other": [
+      {
+        "id": 46,
+        "title": "Landing Page (Modifikasi Templates)",
+        "description": "Modifikasi template HTML/CSS untuk klien [Nama]. Fokus pada kustomisasi CSS, responsivitas, dan optimasi kecepatan.",
+        "technologies": [
+          "HTML",
+          "CSS",
+          "JavaScript"
+        ],
+        "github": "https://github.com/aslamrosul/..."
+      },
+      {
+        "id": 47,
+        "title": "Bot Discord (Contoh)",
+        "description": "Membuat bot Discord sederhana menggunakan Python (discord.py) untuk moderasi otomatis dan perintah kustom.",
+        "technologies": [
+          "Python",
+          "Discord.py",
+          "API"
+        ],
+        "github": "https://github.com/aslamrosul/..."
+      },
+      {
+        "id": 48,
+        "title": "Sistem Respositori Dokumen (Konsep)",
+        "description": "Desain UI/UX dan prototipe awal untuk aplikasi Repositori Dokumen JTI Polinema menggunakan Figma.",
+        "technologies": [
+          "Figma",
+          "UI/UX"
+        ],
+        "github": "https://www.figma.com/design/0q4dPdFlc3plyKMGuA6HRI/Untitled?node-id=152-2&p=f"
+      }
+    ]
+  },
+  "contact": {
+    "text": "Saat ini saya sedang aktif mencari peluang magang (Internship) di bidang Web Development atau Cyber Security. Jika Anda memiliki pertanyaan atau penawaran, jangan ragu untuk menghubungi saya!",
+    "email": "nvrsrndrmrx@gmail.com"
+  },
+  "social": {
+    "github": "https://github.com/aslamrosul",
+    "linkedin": "https://www.linkedin.com/in/aslamrosul/",
+    "email": "nvrsrndrmrx@gmail.com"
+  },
+  "settings": {
+    "cvUrl": "/cv.pdf",
+    "theme": {
+      "accentColor": "#64e1da"
+    }
+  },
+  "_generated": "2026-04-11T12:02:48.667Z"
+}
