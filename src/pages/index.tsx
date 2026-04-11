@@ -9,7 +9,6 @@ import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 import SocialSidebar from '@/components/SocialSidebar'
 import { prisma } from '@/lib/prisma'
-import { saveToCache, loadFromCache } from '@/lib/cache'
 
 interface HomeProps {
   portfolioData: any
@@ -151,9 +150,6 @@ export async function getServerSideProps() {
       }
     }
 
-    // Save to cache after successful fetch
-    saveToCache(portfolioData)
-
     return {
       props: {
         portfolioData
@@ -162,15 +158,25 @@ export async function getServerSideProps() {
   } catch (error) {
     console.error('❌ Database error:', error)
     
-    // Try to load from cache if database fails
-    const cachedData = loadFromCache()
-    if (cachedData) {
-      console.log('⚠️ Using cached data (Supabase might be paused)')
-      return {
-        props: {
-          portfolioData: cachedData
+    // Try to load from static cache file (generated at build time)
+    try {
+      const fs = require('fs')
+      const path = require('path')
+      const cachePath = path.join(process.cwd(), 'public', 'portfolio-cache.json')
+      
+      if (fs.existsSync(cachePath)) {
+        const cachedData = JSON.parse(fs.readFileSync(cachePath, 'utf-8'))
+        console.log('⚠️ Using build-time cached data (Supabase might be paused)')
+        console.log(`📅 Cache generated at: ${cachedData._generated}`)
+        
+        return {
+          props: {
+            portfolioData: cachedData
+          }
         }
       }
+    } catch (cacheError) {
+      console.error('❌ Failed to load cache:', cacheError)
     }
     
     // Fallback to empty data if no cache available
