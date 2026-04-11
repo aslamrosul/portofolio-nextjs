@@ -9,6 +9,7 @@ import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 import SocialSidebar from '@/components/SocialSidebar'
 import { prisma } from '@/lib/prisma'
+import { saveToCache, loadFromCache } from '@/lib/cache'
 
 interface HomeProps {
   portfolioData: any
@@ -150,15 +151,30 @@ export async function getServerSideProps() {
       }
     }
 
+    // Save to cache after successful fetch
+    saveToCache(portfolioData)
+
     return {
       props: {
         portfolioData
       }
     }
   } catch (error) {
-    console.error('Error fetching data from database:', error)
+    console.error('❌ Database error:', error)
     
-    // Fallback to empty data if database fails
+    // Try to load from cache if database fails
+    const cachedData = loadFromCache()
+    if (cachedData) {
+      console.log('⚠️ Using cached data (Supabase might be paused)')
+      return {
+        props: {
+          portfolioData: cachedData
+        }
+      }
+    }
+    
+    // Fallback to empty data if no cache available
+    console.log('⚠️ No cache available, using fallback data')
     return {
       props: {
         portfolioData: {
