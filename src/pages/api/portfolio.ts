@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from '@/lib/prisma'
-import { saveToCache, loadFromCache } from '@/lib/cache'
+import fs from 'fs'
+import path from 'path'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
@@ -72,18 +73,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         }
       }
 
-      // Save to cache after successful fetch
-      saveToCache(data)
-      
       res.status(200).json(data)
     } catch (error) {
       console.error('❌ Database error:', error)
       
-      // Try to load from cache if database fails
-      const cachedData = loadFromCache()
-      if (cachedData) {
-        console.log('⚠️ Using cached data (Supabase might be paused)')
-        return res.status(200).json(cachedData)
+      // Try to load from static cache file (generated at build time)
+      try {
+        const cachePath = path.join(process.cwd(), 'public', 'portfolio-cache.json')
+        if (fs.existsSync(cachePath)) {
+          const cachedData = JSON.parse(fs.readFileSync(cachePath, 'utf-8'))
+          console.log('⚠️ Using build-time cached data (Supabase might be paused)')
+          return res.status(200).json(cachedData)
+        }
+      } catch (cacheError) {
+        console.error('❌ Failed to load cache:', cacheError)
       }
       
       res.status(500).json({ error: 'Failed to fetch data and no cache available' })
@@ -202,74 +205,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           }
         })
       }
-
-      // Fetch updated data and save to cache
-      const [updatedHero, updatedAbout, updatedExperience, updatedFeaturedProjects, updatedOtherProjects, updatedContact, updatedSocial, updatedSettings] = await Promise.all([
-        prisma.hero.findFirst({ include: { roles: { orderBy: { order: 'asc' } } } }),
-        prisma.about.findFirst(),
-        prisma.experience.findMany({ orderBy: { order: 'asc' } }),
-        prisma.featuredProject.findMany({ orderBy: { order: 'asc' } }),
-        prisma.otherProject.findMany({ orderBy: { order: 'asc' } }),
-        prisma.contact.findFirst(),
-        prisma.social.findFirst(),
-        prisma.settings.findFirst()
-      ])
-
-      const updatedData = {
-        hero: {
-          intro: updatedHero?.intro || '',
-          name: updatedHero?.name || '',
-          roles: updatedHero?.roles.map((r: any) => r.text) || [],
-          description: updatedHero?.description || ''
-        },
-        about: {
-          text: updatedAbout?.text || '',
-          image: updatedAbout?.image || '/profil.jpg'
-        },
-        experience: updatedExperience.map((exp: any) => ({
-          id: exp.id,
-          period: exp.period,
-          institution: exp.institution,
-          position: exp.position,
-          description: exp.description
-        })),
-        projects: {
-          featured: updatedFeaturedProjects.map((proj: any) => ({
-            id: proj.id,
-            label: proj.label,
-            title: proj.title,
-            description: proj.description,
-            technologies: proj.technologies,
-            github: proj.github,
-            demo: proj.demo,
-            image: proj.image
-          })),
-          other: updatedOtherProjects.map((proj: any) => ({
-            id: proj.id,
-            title: proj.title,
-            description: proj.description,
-            technologies: proj.technologies,
-            github: proj.github
-          }))
-        },
-        contact: {
-          text: updatedContact?.text || '',
-          email: updatedContact?.email || ''
-        },
-        social: {
-          github: updatedSocial?.github || '',
-          linkedin: updatedSocial?.linkedin || '',
-          email: updatedSocial?.email || ''
-        },
-        settings: {
-          cvUrl: updatedSettings?.cvUrl || '/cv.pdf',
-          theme: {
-            accentColor: updatedSettings?.accentColor || '#64ffda'
-          }
-        }
-      }
-
-      saveToCache(updatedData)
 
       res.status(200).json({ message: 'Data updated successfully' })
     } catch (error) {
