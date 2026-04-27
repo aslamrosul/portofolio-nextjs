@@ -60,6 +60,7 @@ model FeaturedProject {
   github       String
   demo         String?
   image        String
+  imageUrl     String?  // URL when image is clicked (defaults to demo or github)
   order        Int      @default(0)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt

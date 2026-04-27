@@ -46,7 +46,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             technologies: proj.technologies,
             github: proj.github,
             demo: proj.demo,
-            image: proj.image
+            image: proj.image,
+            imageUrl: proj.imageUrl
           })),
           other: otherProjects.map((proj: any) => ({
             id: proj.id,
@@ -153,6 +154,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           github: proj.github,
           demo: proj.demo || null,
           image: proj.image,
+          imageUrl: proj.imageUrl || null,
           order: index
         }))
       })

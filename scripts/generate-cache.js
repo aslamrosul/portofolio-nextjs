@@ -46,7 +46,8 @@ async function generateCache() {
           technologies: proj.technologies,
           github: proj.github,
           demo: proj.demo,
-          image: proj.image
+          image: proj.image,
+          imageUrl: proj.imageUrl
         })),
         other: otherProjects.map((proj) => ({
           id: proj.id,

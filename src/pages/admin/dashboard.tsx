@@ -21,6 +21,7 @@ interface Project {
   github: string
   demo?: string
   image?: string
+  imageUrl?: string
 }
 
 interface ProjectsSection {
@@ -430,6 +431,35 @@ export default function AdminDashboard() {
                           setData({ ...data, projects: newProjects })
                         }}
                       />
+                      <small>Path gambar di folder public/ (contoh: /project1.jpg)</small>
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label>Image URL (Link saat gambar diklik)</label>
+                      <input
+                        type="text"
+                        value={project.imageUrl || ''}
+                        placeholder="Kosongkan untuk pakai Demo URL atau GitHub"
+                        onChange={(e) => {
+                          const newProjects = { ...data.projects }
+                          newProjects.featured[index].imageUrl = e.target.value
+                          setData({ ...data, projects: newProjects })
+                        }}
+                      />
+                      <small>URL tujuan saat gambar diklik. Kosongkan untuk otomatis pakai Demo URL (jika ada) atau GitHub</small>
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label>Demo URL (Opsional)</label>
+                      <input
+                        type="text"
+                        value={project.demo || ''}
+                        placeholder="https://demo.vercel.app"
+                        onChange={(e) => {
+                          const newProjects = { ...data.projects }
+                          newProjects.featured[index].demo = e.target.value
+                          setData({ ...data, projects: newProjects })
+                        }}
+                      />
+                      <small>Link demo live project (jika ada)</small>
                     </div>
                   </div>
                 ))}

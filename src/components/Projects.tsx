@@ -12,6 +12,7 @@ interface ProjectsProps {
       github: string
       demo?: string
       image: string
+      imageUrl?: string
     }>
     other: Array<{
       id: number
@@ -61,7 +62,7 @@ export default function Projects({ data }: ProjectsProps) {
               </div>
             </div>
             <div className={styles.projectImage}>
-              <a href={project.github} target="_blank" rel="noopener noreferrer">
+              <a href={project.imageUrl || project.demo || project.github} target="_blank" rel="noopener noreferrer">
                 <Image src={project.image} alt={`Screenshot ${project.title}`} width={600} height={400} />
               </a>
             </div>

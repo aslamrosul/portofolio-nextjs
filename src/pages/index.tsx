@@ -31,28 +31,6 @@ export default function Home({ portfolioData }: HomeProps) {
 
       fadeElements.forEach(el => fadeObserver.observe(el))
     }
-
-    // Navbar hide on scroll
-    let lastScrollTop = 0
-    const navbar = document.querySelector('.navbar')
-    const navHeight = 80
-
-    const handleScroll = () => {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop
-      
-      if (navbar) {
-        if (scrollTop > lastScrollTop && scrollTop > navHeight) {
-          (navbar as HTMLElement).style.top = `-${navHeight}px`
-        } else {
-          (navbar as HTMLElement).style.top = '0'
-        }
-      }
-      
-      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   return (
@@ -123,7 +101,8 @@ export async function getServerSideProps() {
           technologies: proj.technologies,
           github: proj.github,
           demo: proj.demo,
-          image: proj.image
+          image: proj.image,
+          imageUrl: proj.imageUrl
         })),
         other: otherProjects.map((proj: any) => ({
           id: proj.id,

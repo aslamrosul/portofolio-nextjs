@@ -78,6 +78,7 @@ async function main() {
         github: project.github,
         demo: project.demo || null,
         image: project.image,
+        imageUrl: project.imageUrl || null,
         order: index
       }
     })
