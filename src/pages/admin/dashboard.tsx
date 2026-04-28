@@ -84,6 +84,8 @@ export default function AdminDashboard() {
     setMessage('')
 
     try {
+      if (!data) return
+
       // Validate required fields
       if (!data.hero.name || !data.hero.intro) {
         setMessage('❌ Hero name dan intro harus diisi')
