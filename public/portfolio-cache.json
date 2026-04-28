@@ -16,7 +16,7 @@
   },
   "experience": [
     {
-      "id": 48,
+      "id": 49,
       "period": "2023 - Sekarang",
       "institution": "Politeknik Negeri Malang",
       "position": "D4 - Teknik Informatika",
@@ -26,7 +26,7 @@
   "projects": {
     "featured": [
       {
-        "id": 73,
+        "id": 77,
         "label": "Proyek Laravel",
         "title": "Sistem Pelaporan Kerusakan Fasilitas - FixIT",
         "description": "Bekerja sama dengan beberapa mahasiswa saat semester 5, membangun sistem pelaporan dan perbaikan fasilitas kampus berbasis web untuk Jurusan Teknologi Informasi Polinema menggunakan Laravel 10 dan MySQL. Fitur utama mencakup multi-role login(teknisi, sarana prasarana, dosen, admin, mahasiswa, tenaga pendidik), pelaporan kerusakan dengan foto, prioritas perbaikan berbasis DSS, serta laporan dan statistik fasilitas.",
@@ -43,7 +43,7 @@
         "imageUrl": null
       },
       {
-        "id": 74,
+        "id": 78,
         "label": "Proyek MongoDB & Berita",
         "title": "Sistem Informasi Portal Berita - KataData",
         "description": "Bekerja sama dengan beberapa mahasiswa saat semester 3, membangun web portal berita berbasis MongoDB dengan PHP, HTML, CSS, dan JavaScript. Fitur utama: CRUD berita, kategori, pencarian, notifikasi, berita trending, serta dashboard admin dan halaman utama pengguna.",
@@ -60,10 +60,10 @@
         "imageUrl": null
       },
       {
-        "id": 75,
+        "id": 79,
         "label": "Proyek IoT & Smart City",
         "title": " Adaptive Traffic Monitoring System - Aerial Command",
-        "description": "Bekerja sama dengan tim mahasiswa semester 5, membangun sistem monitoring dan manajemen lalu lintas cerdas berbasis IoT menggunakan Next.js 14, TypeScript, dan Azure Cosmos DB. Sistem ini mengintegrasikan sensor ESP32 untuk deteksi kendaraan real-time dan mengatur durasi lampu lalu lintas secara adaptif. Fitur utama mencakup: dashboard real-time monitoring 4+ persimpangan, analitik lalu lintas dengan visualisasi data, remote IoT configuration, manajemen pengguna multi-role (admin & operator), sistem pelaporan insiden, notifikasi real-time, dan integrasi Azure IoT Hub untuk komunikasi device-to-cloud.",
+        "description": "Bekerja sama dengan tim mahasiswa semester 6, membangun sistem monitoring dan manajemen lalu lintas cerdas berbasis IoT menggunakan Next.js 14, TypeScript, dan Azure Cosmos DB. Sistem ini mengintegrasikan sensor ESP32 untuk deteksi kendaraan real-time dan mengatur durasi lampu lalu lintas secara adaptif. Fitur utama mencakup: dashboard real-time monitoring 4+ persimpangan, analitik lalu lintas dengan visualisasi data, remote IoT configuration, manajemen pengguna multi-role (admin & operator), sistem pelaporan insiden, notifikasi real-time, dan integrasi Azure IoT Hub untuk komunikasi device-to-cloud.",
         "technologies": [
           "Next.js",
           "TypeScript",
@@ -77,7 +77,7 @@
         "imageUrl": "https://traffic-monitoring-app-hah0g9awf6eecfgf.southeastasia-01.azurewebsites.net/"
       },
       {
-        "id": 76,
+        "id": 80,
         "label": "Proyek Fullstack Photo Kiosk",
         "title": "Sistem Photo Kiosk & Dashboard Management - PhotoLabKu",
         "description": "Membangun sistem photo kiosk lengkap dengan aplikasi desktop berbasis Electron untuk kiosk dan dashboard web management menggunakan Next.js. Aplikasi kiosk menyediakan fitur pengambilan foto dengan kamera, pemilihan filter dan frame (termasuk GIF), pemilihan paket cetak, integrasi pembayaran Midtrans, serta QR code untuk download digital. Dashboard admin mencakup manajemen kiosk, cabang, frame & kategori, paket, voucher, galeri foto, transaksi, statistik penjualan dengan grafik, serta konfigurasi sistem. Menggunakan Supabase sebagai backend dan database.",
@@ -94,11 +94,29 @@
         "demo": null,
         "image": "/project4.jpg",
         "imageUrl": "https://photolabku-kiosk-system.vercel.app/"
+      },
+      {
+        "id": 81,
+        "label": "Proyek Mobile & ML",
+        "title": "Leafy - Educational Mobile App for Leaf Venation Classification",
+        "description": "Leafy adalah aplikasi mobile Project-Based Learning (PBL) Semester 5 yang bertujuan untuk mengenalkan dan mengklasifikasikan jenis venasi daun secara interaktif. Aplikasi ini memungkinkan pengguna untuk melakukan scan atau upload gambar daun, mengetahui jenis venasinya, mempelajari ciri-cirinya, serta mengumpulkan poin dan prestasi.",
+        "technologies": [
+          "Flutter",
+          "FastAPI",
+          "TensorFlow",
+          "Firebase",
+          "Python",
+          "NumPy"
+        ],
+        "github": "https://github.com/koctaa04/Leafy-PBL",
+        "demo": null,
+        "image": "/project5.jpg",
+        "imageUrl": null
       }
     ],
     "other": [
       {
-        "id": 94,
+        "id": 97,
         "title": "Landing Page (Modifikasi Template)",
         "description": "Modifikasi template HTML/CSS untuk klien [Nama]. Fokus pada kustomisasi CSS, responsivitas, dan optimasi kecepatan.",
         "technologies": [
@@ -109,7 +127,7 @@
         "github": "https://github.com/aslamrosul/..."
       },
       {
-        "id": 95,
+        "id": 98,
         "title": "Bot Discord (Contoh)",
         "description": "Membuat bot Discord sederhana menggunakan Python (discord.py) untuk moderasi otomatis dan perintah kustom.",
         "technologies": [
@@ -120,7 +138,7 @@
         "github": "https://github.com/aslamrosul/..."
       },
       {
-        "id": 96,
+        "id": 99,
         "title": "Sistem Respositori Dokumen (Konsep)",
         "description": "Desain UI/UX dan prototipe awal untuk aplikasi Repositori Dokumen JTI Polinema menggunakan Figma.",
         "technologies": [
@@ -146,5 +164,5 @@
       "accentColor": "#64ffda"
     }
   },
-  "_generated": "2026-04-28T00:45:16.976Z"
+  "_generated": "2026-04-28T02:49:11.673Z"
 }
