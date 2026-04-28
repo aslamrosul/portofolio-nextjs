@@ -57,7 +57,21 @@ export default function AdminDashboard() {
     try {
       const res = await fetch('/api/portfolio')
       const portfolioData: PortfolioData = await res.json()
-      setData(portfolioData)
+      
+      // Convert null values to empty strings for form inputs
+      const cleanedData = {
+        ...portfolioData,
+        projects: {
+          featured: portfolioData.projects.featured.map(proj => ({
+            ...proj,
+            demo: proj.demo || '',
+            imageUrl: proj.imageUrl || ''
+          })),
+          other: portfolioData.projects.other
+        }
+      }
+      
+      setData(cleanedData)
     } catch (error) {
       console.error('Failed to fetch data:', error)
     } finally {
@@ -70,20 +84,59 @@ export default function AdminDashboard() {
     setMessage('')
 
     try {
+      // Validate required fields
+      if (!data.hero.name || !data.hero.intro) {
+        setMessage('❌ Hero name dan intro harus diisi')
+        setSaving(false)
+        return
+      }
+
+      if (data.projects.featured.some(p => !p.title || !p.github || !p.image)) {
+        setMessage('❌ Semua featured project harus punya title, github, dan image')
+        setSaving(false)
+        return
+      }
+
+      // Validate and clean data before sending
+      const cleanData = {
+        ...data,
+        projects: {
+          featured: data.projects.featured.map(proj => ({
+            ...proj,
+            demo: proj.demo && proj.demo.trim() !== '' ? proj.demo.trim() : null,
+            imageUrl: proj.imageUrl && proj.imageUrl.trim() !== '' ? proj.imageUrl.trim() : null,
+            technologies: proj.technologies.filter(t => t && t.trim() !== '')
+          })),
+          other: data.projects.other.map(proj => ({
+            ...proj,
+            technologies: proj.technologies.filter(t => t && t.trim() !== '')
+          }))
+        }
+      }
+
+      console.log('Sending data:', cleanData)
+
       const res = await fetch('/api/portfolio', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        body: JSON.stringify(cleanData)
       })
+
+      const result = await res.json()
+      console.log('Response:', result)
 
       if (res.ok) {
         setMessage('✅ Data berhasil disimpan!')
         setTimeout(() => setMessage(''), 3000)
+        // Refresh data after save
+        fetchData()
       } else {
-        setMessage('❌ Gagal menyimpan data')
+        setMessage(`❌ Gagal: ${result.details || result.error || 'Unknown error'}`)
+        console.error('Save error:', result)
       }
     } catch (error) {
-      setMessage('❌ Terjadi kesalahan')
+      console.error('Save exception:', error)
+      setMessage(`❌ Error: ${error instanceof Error ? error.message : 'Unknown'}`)
     } finally {
       setSaving(false)
     }
@@ -336,7 +389,8 @@ export default function AdminDashboard() {
                         technologies: [],
                         github: '',
                         demo: '',
-                        image: '/project1.jpg'
+                        image: '/project1.jpg',
+                        imageUrl: ''
                       })
                       setData({ ...data, projects: newProjects })
                     }}
